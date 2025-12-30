@@ -177,63 +177,74 @@ function PSQI({ answers, setAnswers, goToPSS }) {
 
   return (
     <>
-      <h1>PSQI</h1>
+      <h1 className="text-center">PSQI</h1>
 
       {quizDataPSQI.tipe1.map((e) => (
-        <div key={e.id}>
-          <h3>{e.text}</h3>
-
+        <div key={e.id} className="rounded-[10px] pb-[10px] bg-blue-600 text-white flex flex-col mt-[20px] w-[97%] self-center">
+          <div className="rounded-t-[10px] w-[100%] bg-blue-200 p-[10px] mb-[10px] text-black self-center"><h3>{e.text}</h3></div>
+          <div><label htmlFor={answers[`${e.id}_jam`] || ""} className="ml-[10px] mr-[5px]">Jam: </label>
           <input
             type="number"
             placeholder="Jam"
             name={`${e.id}_jam`}
             value={answers[`${e.id}_jam`] || ""}
+            id={answers[`${e.id}_jam`] || ""}
             onChange={handleChange}
-          />
-
+            min={0}
+            className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0"
+          /><br></br>
+          <label htmlFor={answers[`${e.id}_menit`] || ""} className="ml-[10px] mr-[5px]">Menit: </label>
           <input
             type="number"
             placeholder="Menit"
             name={`${e.id}_menit`}
             value={answers[`${e.id}_menit`] || ""}
             onChange={handleChange}
-          />
+            min={0}
+            className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0"
+          /></div>
         </div>
       ))}
 
       {quizDataPSQI.tipe2.map((e) => (
-        <div key={e.id}>
-          <h3>{e.text}</h3>
+        <div key={e.id} className="rounded-[10px] pb-[10px] bg-blue-600 text-white flex flex-col mt-[20px] w-[97%] self-center">
+          <div className="rounded-t-[10px] w-[100%] bg-blue-200 p-[10px] mb-[10px] text-black self-center"><h3>{e.text}</h3></div>
+          <div><label htmlFor={answers[e.id] || ""} className="ml-[10px] mr-[5px]">Jam: </label>
           <input
             type="number"
             name={e.id}
             value={answers[e.id] || ""}
+            id={answers[e.id] || ""}
             onChange={handleChange}
-          />{" "}
-          jam
+            placeholder="Jam"
+            className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0"
+          />{" "}</div>
         </div>
       ))}
       {quizDataPSQI.tipe3.map((e) => (
-        <div key={e.id}>
-          <h3>{e.text}</h3>
+        <div key={e.id} className="rounded-[10px] pb-[10px] bg-blue-600 text-white flex flex-col mt-[20px] w-[97%] self-center">
+          <div className="rounded-t-[10px] w-[100%] bg-blue-200 p-[10px] mb-[10px] text-black self-center"><h3>{e.text}</h3></div>
+          <div><label htmlFor={answers[e.id] || ""} className="ml-[10px] mr-[5px]">Menit: </label>
           <input
             type="number"
             name={e.id}
             value={answers[e.id] || ""}
+            id={answers[e.id] || ""}
             onChange={handleChange}
-          />{" "}
-          menit
+            placeholder="Menit"
+            className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0"
+          />{" "}</div>
         </div>
       ))}
 
       {quizDataPSQI.tipe4.map((e) => (
-        <div key={e.id}>
-          <h3>{e.text}</h3>
-          <div className="flex flex-col">
+        <div key={e.id} className="rounded-[10px] pb-[10px] bg-blue-600 text-white flex flex-col mt-[20px] w-[97%] self-center">
+          <div className="rounded-t-[10px] w-[100%] bg-blue-200 p-[10px] mb-[10px] text-black self-center"><h3>{e.text}</h3></div>
+          <div className="flex flex-col ml-8">
           {e.labelPilgan.map((label, index) => {
             const val = e.value[index];
             return (
-              <label key={index}>
+              <label key={index} className="mb-1">
                 <input
                   type="radio"
                   name={e.id}
@@ -248,11 +259,20 @@ function PSQI({ answers, setAnswers, goToPSS }) {
         </div>
       ))}
 
+      <div className="flex flex-row w-screen justify-between p-5">
       <button onClick={goToPSS}>Next</button>
+      </div>
     </>
   );
 }
-
+function START({answers, setAnswers, goToPSQI}){
+  useEffect(()=>{
+    setAnswers=null
+  },[])
+  return(
+    <div className="flex flex-row w-screen justify-between p-5">
+      <button onClick={goToPSQI}>Start Quiz</button></div>)
+}
 function PSS({ answers, setAnswers, goToPSQI, submit }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -264,13 +284,14 @@ function PSS({ answers, setAnswers, goToPSQI, submit }) {
       <h1>PSS</h1>
 
       {quizDataPSS.map((e) => (
-        <div key={e.id}>
-          <h3>{e.text}</h3>
+        <div key={e.id} className="rounded-[10px] pb-[10px] bg-blue-600 text-white flex flex-col mt-[20px] w-[97%] self-center">
+          <div className="rounded-t-[10px] w-[100%] bg-blue-200 p-[10px] mb-[10px] text-black self-center"><h3>{e.text}</h3></div>
+          <div className="flex flex-col ml-8">
 
           {e.labelPilgan.map((label, index) => {
             const val = e.value[index];
             return (
-              <label key={index}>
+              <label key={index} className="mb-1">
                 <input
                   type="radio"
                   name={e.id}
@@ -281,18 +302,19 @@ function PSS({ answers, setAnswers, goToPSQI, submit }) {
                 {label}
               </label>
             );
-          })}
+          })}</div>
         </div>
       ))}
-
+      <div className="flex flex-row w-screen justify-between p-5">
       <button onClick={goToPSQI}>Back</button>
       <button onClick={submit}>Submit</button>
+      </div>
     </>
   );
 }
 
 export default function Quiz() {
-  const [page, setPage] = useState("psqi");
+  const [page, setPage] = useState("start");
   const [coords, setCoords] = useState({ lat: null, long: null });
   const [answers, setAnswers] = useState({});
   const [error, setError] = useState(null);
@@ -407,7 +429,14 @@ export default function Quiz() {
           submit={submit}
         />
       )}
-      <pre>{coords.lat}<br></br>{coords.long}</pre>
+
+      {page === "start" && (
+        <START
+          answers={answers}
+          setAnswers={setAnswers}
+          goToPSQI={() => setPage("psqi")}
+        />
+      )}
     </>
   );
 }
